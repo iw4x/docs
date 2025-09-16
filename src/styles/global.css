@@ -1,0 +1,15 @@
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #a8d5a2; /* soft green */
+  color: #000;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 9999px; /* pill shape */
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.download-btn:hover {
+  background-color: #8bc68f; /* darker green hover */
+}
