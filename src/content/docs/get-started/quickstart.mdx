@@ -131,43 +131,10 @@ Once you've installed IW4x, you should see the following folder and files in you
 <FileTree>
 - `Call of Duty: Modern Warfare 2`
   - iw4x/
-  - **launcher**
-    - cache.json
-    - **config.json**
-    - log.log
   - iw4x.exe
-  - iw4x-launcher.exe
+  - **iw4x-launcher.exe**
   - ... other files and folders
 </FileTree>
 
-If you open **config.json** in a text editor (such as Notepad), you'll see something like this:
-
-```json title="launcher/config.json"
-{
-  "update_only": false,
-  "skip_self_update": false,
-  "force_update": false,
-  "args": "-stdout",
-  "offline": false,
-  "testing": false,
-  "disable_art": false,
-  "dxvk": false
-}
-```
-
-These are configuration values you can adjust to suit your preferences (more details about each option on [GitHub](https://github.com/iw4x/launcher#%EF%B8%8F-command-line-arguments)).  
-The most important part is the `"args"` configuration: The arguments you add there will be used whenever you start the game via launcher.  
-
-For example, if you want to play offline against bots using the [Bot Warfare Mod](https://github.com/ineedbots/iw4_bot_warfare), you could set `"args"` like this:
-
-```diff lang="json" ins=" -disable-mod-unloading +set fs_game mods/mp_bots"
-{
-  "args": "-stdout -disable-mod-unloading +set fs_game mods/mp_bots",
-  "offline": false,
-  "testing": false,
-  "disable_art": false,
-  "dxvk": false
-}
-```
 
 Now, each time you launch the game via the launcher, it will automatically load the mod!
