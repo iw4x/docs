@@ -26,7 +26,7 @@ It is this simplicity that makes IW4x portable across different operating system
 ## Install IW4x on macOS using Wineskin
 
 :::caution
-This guide uses the Unofficial Wineskin Winery to create a wrapper.
+This guide uses Wineskin to create a wrapper.
 This method is required for macOS Catalina (10.15) and newer, as they lack native 32-bit support.
 :::
 
@@ -34,35 +34,41 @@ This method is required for macOS Catalina (10.15) and newer, as they lack nativ
 
 Before beginning, ensure you have the following:
 
-**Call of Duty: Modern Warfare 2 Files**: You must own the game. You will need the Windows version of the game files.
+* **Call of Duty: Modern Warfare 2 Files**: You must own the game. You will need the Windows version of the game files from Steam.
 
-**Wineskin Winery**: The modern version maintained by Gcenx.
+* **Homebrew**: The macOS package manager. If you do not have it, install it from [**brew.sh**](https://brew.sh/).
 
 :::note
 You cannot use the native macOS installation of MW2 from Steam, as it lacks the necessary executables.
 :::
 
-## 1. Create the Wineskin Wrapper
+## 1. Create the Wrapper
 <Steps>
-1. Download Wineskin Winery (Gcenx version) from GitHub and unzip it to your Applications folder.
-	<LinkButton
-	href="https://github.com/Gcenx/WineskinServer/releases"
-	variant="secondary"
-	icon="external"
-	iconPlacement="start"
-	>Download **Wineskin Winery**</LinkButton>
+1. Open your terminal and install Wineskin Winery via Homebrew:
+   ``` cmd
+   brew install --cask --no-quarantine The-Wineskin-Project/wineskin/wineskin
+   ```
 
-2. Open Wineskin Winery.
+2. Install Rosetta 2
+	* Type the following command into your terminal and press enter
+	``` cmd
+	softwareupdate --install-rosetta --agree-to-license
+	```
+    :::caution[Caution]
+	Note that it is **extremely** difficult to remove Rosetta 2 once it is installed
+	:::
 
-3. Update the Engine:
+3. Open Wineskin Winery.
+
+4. Update the Engine:
 	* Click the **+** button next to New Engine(s) available!.
-	* Select the latest `WS11WineCX` engine (e.g., WS11WineCX64Bit...).
+	* Select the latest `WS12WineCX` engine (e.g., WS12WineCX64Bit...).
 	:::tip[Critical]
 	You must use a CX engine to play 32-bit games on macOS Catalina or later.
 	:::
 	* Click Download and Install.
 
-4. Create Wrapper:
+5. Create Wrapper:
 	* 1. Click **Create New Blank Wrapper**.
 	* 2. Name it **IW4x**.
 	* 3. Click **OK**.
