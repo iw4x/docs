@@ -3,6 +3,7 @@ title: Manual Installation On MacOS
 description: Install IW4x without the Launcher on MacOS
 prev: Manual Installation on Linux
 ---
+import { LinkButton, Steps } from '@astrojs/starlight/components';
 
 :::caution
 
@@ -20,3 +21,196 @@ The installation steps, ensuring the base MW2 files are present, placing `iw4x.d
 The result is that IW4x on MacOS is less a separate port than a faithful reproduction of the Windows environment, hosted within a compatibility container. While this may appear circuitous, it underscores IW4x's neutrality: the project provides only the essential modifications.  
 
 It is this simplicity that makes IW4x portable across different operating systems, even when those systems themselves were never official targets for Modern Warfare 2.
+
+
+## Install IW4x on macOS using Wineskin
+
+:::caution
+This guide uses the Unofficial Wineskin Winery to create a wrapper.
+This method is required for macOS Catalina (10.15) and newer, as they lack native 32-bit support.
+:::
+
+### Prerequisites
+
+Before beginning, ensure you have the following:
+
+**Call of Duty: Modern Warfare 2 Files**: You must own the game. You will need the Windows version of the game files.
+
+**Wineskin Winery**: The modern version maintained by Gcenx.
+
+:::note
+You cannot use the native macOS installation of MW2 from Steam, as it lacks the necessary executables.
+:::
+
+## 1. Create the Wineskin Wrapper
+<Steps>
+1. Download Wineskin Winery (Gcenx version) from GitHub and unzip it to your Applications folder.
+	<LinkButton
+	href="https://github.com/Gcenx/WineskinServer/releases"
+	variant="secondary"
+	icon="external"
+	iconPlacement="start"
+	>Download **Wineskin Winery**</LinkButton>
+
+2. Open Wineskin Winery.
+
+3. Update the Engine:
+	* Click the **+** button next to New Engine(s) available!.
+	* Select the latest `WS11WineCX` engine (e.g., WS11WineCX64Bit...).
+	:::tip[Critical]
+	You must use a CX engine to play 32-bit games on macOS Catalina or later.
+	:::
+	* Click Download and Install.
+
+4. Create Wrapper:
+	* 1. Click **Create New Blank Wrapper**.
+	* 2. Name it **IW4x**.
+	* 3. Click **OK**.
+	* 4. Once finished, click **View Wrapper** in Finder.
+</Steps>
+
+## 2. Install Windows Dependencies
+
+IW4x requires specific Windows libraries to function.
+
+<Steps>
+
+1. Right-click your new `IW4x.app` wrapper and select **Show Package Contents**.
+
+2. Double-click the Wineskin application inside.
+
+3. Select **Advanced > Tools > Winetricks.**
+
+4. Search for and check the following boxes:
+	* `dotnet472`
+	* `vcrun2010`
+	* `d3dcompiler_47`
+	* `d3dx9`
+
+5. Click **Run**.
+	* Accept default prompts.
+	* If the .NET installer asks to restart, choose **Restart Later**.
+</Steps>
+
+## 3. Install Game Files
+
+Choose one of the options below based on whether you already have the game files.
+
+**Option A: I already have the Windows Files**
+
+<Steps>
+
+1. Inside the wrapper's Package Contents, navigate to:
+	```cmd
+	drive_c/Program Files (x86)/
+	```
+
+2. Create a new folder named **Call of Duty Modern Warfare 2.**
+3. Copy your clean MW2 game files into this folder.
+
+</Steps>
+
+**Option B: I need to download them via Steam**
+
+<Steps>
+1. Open **Winetricks** (inside Wineskin > Advanced > Tools).
+
+2. Select **apps**, check **Steam**, and click **Run.**
+
+3. Login to Steam and download **Call of Duty: Modern Warfare 2 - Multiplayer.**
+	* Note: Steam will download the Windows version automatically inside the wrapper.
+
+4. Once downloaded, **close Steam completely.**
+
+5. Move the files:
+	* Go to drive_c/Program Files (x86)/Steam/steamapps/common/.
+	* Cut the Call of Duty Modern Warfare 2 folder.
+	* Paste it into drive_c/Program Files (x86)/.
+	* Moving the game out of the Steam folder prevents Steam from overwriting IW4x files.
+
+</Steps>
+
+## 4. Install IW4x
+
+Choose one of the methods below. We recommend using the Launcher (Option A) as it keeps your game up to date automatically.
+
+**Option A: Launcher (Recommended)**
+
+<LinkButton
+href="https://github.com/iw4x/launcher"
+variant="primary"
+icon="rocket"
+iconPlacement="start"
+>Download **iw4x-launcher.exe**</LinkButton>
+
+<Steps>
+
+1. Navigate to your game folder inside the wrapper:
+	```cmd
+	drive_c/Program Files (x86)/Call of Duty Modern Warfare 2/
+	```
+
+2. Place iw4x-launcher.exe into this folder.
+3. Proceed to Step 5.
+
+</Steps>
+
+**Option B: Manual Install**
+
+Use this if the launcher fails or if you prefer managing files manually.
+
+<LinkButton
+href="https://github.com/iw4x/iw4x-client/releases/latest/download/iw4x.dll"
+variant="secondary"
+icon="seti:windows"
+iconPlacement="start"
+>Download **iw4x.dll**</LinkButton>
+
+<LinkButton
+href="https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x.exe"
+variant="secondary"
+icon="seti:windows"
+iconPlacement="start"
+>Download **iw4x.exe**</LinkButton>
+
+<LinkButton
+href="https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/release.zip"
+variant="secondary"
+icon="seti:windows"
+iconPlacement="start"
+>Download **release.zip**</LinkButton>
+
+<Steps>
+
+1. Navigate to your game folder inside the wrapper:
+	```cmd
+	drive_c/Program Files (x86)/Call of Duty Modern Warfare 2/
+	```
+
+2. Extract `release.zip` into this folder.
+	* Ensure the files (`iw4x` folder, `zone` folder) are in the root of the game folder, not a sub-folder.
+
+3. Place `iw4x.dll` and `iw4x.exe` into this folder.
+
+4. Delete `installscript.vdf` if it exists.
+</Steps>
+
+## 5. Configure & Launch
+
+You must tell Wineskin which executable to launch.
+
+<Steps>
+
+1. Go back to the main Wineskin window (Advanced tab).
+
+2. Click **Configuration**.
+
+3. Next to "Windows EXE", click **Browse**.
+
+4. Select the executable corresponding to the method you chose in Step 4:
+	* **If using Launcher:** Select `iw4x-launcher.exe`.
+	* **If Manual:** Select `iw4x.exe`.
+
+5. Close the window and double-click `IW4x.app` to play.
+
+</Steps>
