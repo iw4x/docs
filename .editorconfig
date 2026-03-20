@@ -1,0 +1,6 @@
+root = true
+
+# Markdown
+#
+[*.mdx]
+trim_trailing_whitespace = false

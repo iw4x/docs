@@ -123,51 +123,57 @@ If you see the warning, you can safely click on **`More info`** and then **`Run 
 
 :::note
 We recommend using the launcher every time you play IW4x.  
-It will automatically download any updates and provides additional customization options.
+It will automatically download any updates, verify your installation, and start the game.
 :::
 
-Once you've installed IW4x, you should see the following folder and files in your game directory:
+Once you've installed IW4x, you should see the following files in your game directory:
 
-<FileTree>
-- `Call of Duty: Modern Warfare 2`
-  - iw4x/
-  - **launcher**
-    - cache.json
-    - **config.json**
-    - log.log
-  - iw4x.exe
-  - iw4x-launcher.exe
-  - ... other files and folders
-</FileTree>
+\<FileTree\>
 
-If you open **config.json** in a text editor (such as Notepad), you'll see something like this:
+  - `Call of Duty: Modern Warfare 2`
+      - iw4x/
+      - iw4x.exe
+      - **iw4x-launcher.exe**
+      - ... other files and folders
+        \</FileTree\>
 
-```json title="launcher/config.json"
-{
-  "update_only": false,
-  "skip_self_update": false,
-  "force_update": false,
-  "args": "-stdout",
-  "offline": false,
-  "testing": false,
-  "disable_art": false,
-  "dxvk": false
-}
+### Command Line Arguments (CLI)
+
+The IW4x launcher is powered by a Command Line Interface. Instead of editing a configuration file, you customize the launcher's behavior by passing arguments to it.
+
+The most common way to do this on Windows is by creating a shortcut:
+
+1.  Right-click `iw4x-launcher.exe` and select **Create shortcut**.
+2.  Right-click the new shortcut and select **Properties**.
+3.  In the **Target** field, add your desired arguments to the very end of the line (outside the quotes).
+
+#### Example: Loading a Mod
+
+If you want to play offline against bots using the [Bot Warfare Mod](https://github.com/ineedbots/iw4_bot_warfare), you need to pass specific arguments to the game. You can do this using the `--game-args` flag.
+
+Your shortcut's **Target** field would look something like this:
+
+```cmd
+"C:\...\Call of Duty Modern Warfare 2\iw4x-launcher.exe" --game-args "-disable-mod-unloading" --game-args "+set fs_game mods/mp_bots"
 ```
 
-These are configuration values you can adjust to suit your preferences (more details about each option on [GitHub](https://github.com/iw4x/launcher#%EF%B8%8F-command-line-arguments)).  
-The most important part is the `"args"` configuration: The arguments you add there will be used whenever you start the game via launcher.  
+Now, every time you use this shortcut, the launcher will ensure your files are up to date and then automatically start the game with the Bot Warfare mod loaded\!
 
-For example, if you want to play offline against bots using the [Bot Warfare Mod](https://github.com/ineedbots/iw4_bot_warfare), you could set `"args"` like this:
+### Available Launcher Options
 
-```diff lang="json" ins=" -disable-mod-unloading +set fs_game mods/mp_bots"
-{
-  "args": "-stdout -disable-mod-unloading +set fs_game mods/mp_bots",
-  "offline": false,
-  "testing": false,
-  "disable_art": false,
-  "dxvk": false
-}
-```
+Here is a list of common arguments you can use to configure the launcher:
 
-Now, each time you launch the game via the launcher, it will automatically load the mod!
+| Argument | Description |
+| :--- | :--- |
+| `--game-args "<arg>"` | Additional arguments to pass to the game executable. Can be specified multiple times. |
+| `--prerelease` | Opt-in to pre-release (beta) updates. Use this to test upcoming features before they are marked as stable. |
+| `--skip-launch` | Skip launching the game after updating/installing. The launcher will perform all operations but exit without starting the game. |
+| `--game-exe "<file>"` | The game executable to launch. (Defaults to `iw4x.exe`). |
+| `--path "<dir>"` | The installation directory for the game files. (Defaults to the current working directory). |
+| `--jobs` or `-j <num>` | The number of parallel download jobs to run. (Defaults to `99`). |
+| `--no-self-update` | Skip the automatic launcher self-update check. |
+| `--self-update-only`| Only check for and apply launcher updates, then exit. Does not update game files. |
+| `--help` | Show the help message and exit. |
+| `--version` | Show version information and exit. |
+
+*(For advanced users: You can also easily pass these arguments using a `.bat` file or directly via your terminal/command prompt).*
