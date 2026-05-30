@@ -1,0 +1,73 @@
+---
+title: Controlling an IW4x server with RCON
+description: Controlling an IW4x server with RCON
+---
+
+import { Steps, LinkCard, LinkButton, FileTree, Icon } from '@astrojs/starlight/components';
+
+## Prerequisite information
+
+RCON (Remote Console) allows a server administrator to execute server commands remotely.
+
+There are two different types of RCON, that being regular RCON and the newer rconSafe. The difference between the two comes down to how the administrator authenticates themselves with the server.
+
+When using regular RCON, an administrator authenticates with a password which is broadcast across the network in plaintext, while with rconSafe, the administrator authenticates with an RSA keypair as opposed to a password.
+
+A side effect of rconSafe is that an administrator with the private key does not need to log in with a passphrase and instead can immediately begin running commands.
+
+In theory, if an attacker were to capture a regular RCON packet from an administrator, they would have the RCON password, and would therefore have gained control of the server. With rconSafe, an attacker would instead have to acquire the administrators keypair stored on their computer in order to gain control of the server.
+
+If you intend on or are using IW4MAdmin, regular RCON is expected to be configured.
+
+### Setting up regular RCON
+
+1. Set a strong password in your `server.cfg`:
+```bash
+set rcon_password "your_strong_password_here"
+```
+
+:::danger[Security Warning]
+
+With regular RCON, your RCON password is the sole factor that authenticates you as an administrator. This password should be kept safe and not shared with others unless you wish to give them administrative access to your server.
+:::
+
+### Connecting via regular RCON
+
+You may connect using an RCON client or via the in-game RCON client with:
+```bash
+/rcon login your_password_here
+/rcon <command>
+```
+
+### Setting up rconSafe
+
+In order to use rconSafe, an RSA keypair must be generated. The expected format is RSA 4096 in DER format, and the IW4x game client can generate appropriate keys itself. Run when connected to a server:
+
+```bash
+/rconSafe <random_command_to_trigger_generation>
+```
+
+The keypair should now be in the client game folder, next to `iw4x.exe`.
+
+Once you have your `rsa-public.key`, you may place that on your IW4x server immediately next to the `iw4x.exe` binary in the servers root directory- the server should automatically detect it.
+
+:::danger[Security Warning]
+
+You should NOT copy your *private* key to the server or share it with anyone that shouldn't have access to the server via RCON. The private key should be kept on the computer you are going to be connecting to the server from, as this is what authenticates you as an administrator to the server.
+:::
+
+### Connecting via rconSafe
+
+After generating the appropriate keys and placing the **public** key on the server, you may connect using an RCON client that supports IW4x' rconSafe or run commands via the in-game rconSafe client with:
+
+```bash
+/rconSafe <command>
+```
+
+When using the in-game rconSafe client, the keypair should be kept in the root of the game directory, next to `iw4x.exe`.
+
+## RCON clients
+
+There is a client that supports both regular RCON and rconSafe maintained by a staff member [here](https://github.com/kkrruumm/iw4x-rcon).
+
+Note that this client *only* provides RCON functionality and is **not** a replacement for full administrative suites like IW4MAdmin.
