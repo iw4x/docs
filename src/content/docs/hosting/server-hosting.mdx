@@ -1,6 +1,8 @@
 ---
 title: Setting up a Server
 description: Setup and host servers on IW4x
+prev:
+    link: /hosting/rcon
 ---
 
 
@@ -629,32 +631,4 @@ IW4MAdmin is a powerful web-based administration tool designed specifically for 
 
 RCON allows you to execute server commands remotely without direct access to the server console.
 
-**Setting up RCON:**
-
-1. Set a strong password in `server.cfg`:
-
-```bash
-   set rcon_password "your_secure_password_here"
-```
-
-2. Connect using an RCON client or in-game:
-
-```bash
-   /rcon login your_secure_password_here
-   /rcon [command]
-```
-
-**Useful RCON commands:**
-
-- `/rcon status` - List connected players
-- `/rcon map mp_terminal` - Change map
-- `/rcon g_gametype war` - Change game mode
-- `/rcon kick [player]` - Kick a player
-- `/rcon ban [player]` - Ban a player
-
-
-
-:::danger[Security Warning]
-
-RCON passwords give complete control over your server. Use a strong, unique password and only share it with trusted administrators. Never post your RCON password in public channels or configuration files/logs you share online.
-:::
+There is a dedicated page for RCON [here](/hosting/rcon).
