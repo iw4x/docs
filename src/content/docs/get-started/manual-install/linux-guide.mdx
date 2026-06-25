@@ -41,34 +41,17 @@ For example, assuming `$STEAMLIBRARY` points to your Steam library, IW4x can be 
    curl -L https://github.com/iw4x/iw4x-client/releases/latest/download/iw4x.dll -o iw4x.dll
    ```
 
-2. **Download `iw4x.exe`**
-
-   ```bash
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x.exe -o iw4x.exe
-   ```
-
-3. **Download `raw files`**
+2. **Download `raw files` and `iw4x.exe`**
 
    ```bash
    curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/release.zip -o release.zip
    ```
 
-4. **Extract archive**
+3. **Extract archive**
 
     ```bash
     unzip -o release.zip -d "$STEAMLIBRARY/steamapps/common/Call of Duty Modern Warfare 2"
     ```
-
-5. **Download `iwd files`**
-
-   ```bash
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_00.iwd -o iw4x/iw4x_00.iwd
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_01.iwd -o iw4x/iw4x_01.iwd
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_02.iwd -o iw4x/iw4x_02.iwd
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_03.iwd -o iw4x/iw4x_03.iwd
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_04.iwd -o iw4x/iw4x_04.iwd
-   curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_05.iwd -o iw4x/iw4x_05.iwd
-   ```
 
 </Steps>
 
@@ -129,7 +112,7 @@ Though more involved, this method grants precise control over the runtime enviro
 
 ## Install using POSIX Shell Script
 
-Once of our awesome community members maintains script that automates  installing and updating IW4x on Linux!  
+One of our awesome community members maintains script that automates installing and updating IW4x on Linux and other unix-likes!
 You can check it out here: https://github.com/kkrruumm/iw4x-updoot  
 Make sure to read through their README for usage instructions and details.
 
