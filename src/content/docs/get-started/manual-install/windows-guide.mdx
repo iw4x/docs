@@ -55,17 +55,10 @@ Once you've located the Modern Warfare 2 game directory, you can download the la
 
 <Video src={download_iw4x} />
 
-## 3. Download Raw Files
+## 3. Download Raw Files and `iw4x.exe`
 
 The [raw files](https://github.com/iw4x/iw4x-rawfiles) are additional assets like maps, weapons, and scripts that enhance your IW4x experience.  
 Like in the [previous step](#2-download-iw4x), download and save the latest release version into your game directory.
-
-<LinkButton
-    href="https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x.exe"
-    variant="primary"
-    icon="seti:windows"
-    iconPlacement="start"
->Download **iw4x.exe**</LinkButton>
 
 <LinkButton
     href="https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/release.zip"
@@ -74,9 +67,9 @@ Like in the [previous step](#2-download-iw4x), download and save the latest rele
     iconPlacement="start"
 >Download **release.zip**</LinkButton>
 
-You'll find several more downloads on GitHub, but the most important ones are:
+You'll find several items on GitHub, but the most important ones are:
 
-- **iw4x.exe** - A custom version of the original `iw4mp.exe`, designed to load `iw4x.dll` (downloaded in the previous step)
+- **iw4x.exe** - A custom version of the original `iw4mp.exe`, designed to load `iw4x.dll` (included in `release.zip`)
 - **release.zip** - Contains all required extra assets for IW4x
 
 Additional files you may encounter:
@@ -130,40 +123,22 @@ The instructions below simply show how to perform the same steps using PowerShel
    Start-BitsTransfer -source https://github.com/iw4x/iw4x-client/releases/latest/download/iw4x.dll
    ```
 
-3. **Download `iw4x.exe`**
-
-   ```ps
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x.exe
-   ```
-
-4. **Download `release.zip`**
+3. **Download `release.zip`**
 
    ```ps
    Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/release.zip
    ```
 
-5. **Extract `release.zip`**
+4. **Extract `release.zip`**
 
    ```ps
    Expand-Archive release.zip -DestinationPath .
    ```
 
-6. **Delete `release.zip`**
+5. **Delete `release.zip`**
 
    ```ps
    Remove-Item release.zip
-   ```
-
-7. **Download `.iwd files`**
-
-   ```ps
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_00.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_00.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_01.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_02.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_03.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_04.iwd iw4x
-   Start-BitsTransfer -source https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/iw4x_05.iwd iw4x
    ```
 
 </Steps>
