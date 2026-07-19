@@ -53,9 +53,43 @@ For example, assuming `$STEAMLIBRARY` points to your Steam library, IW4x can be 
     unzip -o release.zip -d "$STEAMLIBRARY/steamapps/common/Call of Duty Modern Warfare 2"
     ```
 
+4. **Install the optional DLC files**
+
+   The additional DLC files are not included in `release.zip`. Download the DLC manifest, then install each file in the appropriate MW2 directory:
+
+   ```bash
+   GAME_DIR="$STEAMLIBRARY/steamapps/common/Call of Duty Modern Warfare 2"
+
+   mkdir -p "$GAME_DIR/main" "$GAME_DIR/zone/dlc"
+
+   curl -L https://cdn.iw4x.io/update.json -o dlcs.json
+
+   jq -r \
+     '.files[]
+      | select(.path | test("\\.(iwd|ff)$"))
+      | [.path, .asset_name, .blake3]
+      | @tsv' \
+     dlcs.json |
+   while IFS="$(printf '\t')" read -r path name checksum; do
+     case "$name" in
+       *.iwd) destination="$GAME_DIR/main/$name" ;;
+       *.ff)  destination="$GAME_DIR/zone/dlc/$name" ;;
+     esac
+
+     curl -L "https://cdn.iw4x.io/$path" -o "$destination"
+     printf '%s  %s\n' "$checksum" "$destination" | b3sum --check
+   done
+
+   rm -f dlcs.json
+   ```
+
+   This step requires `jq` and `b3sum`.
+
 </Steps>
 
-From there, launching Modern Warfare 2 through Steam also launches IW4x, and the Proton layer handles all necessary translations in the background.
+From there, Add IW4x to your Steam library as a non-Steam game. Once added, right-click the IW4x entry and select Properties. Under Compatibility, enable Force the use of a specific Steam Play compatibility tool, then select Proton Experimental.
+
+IW4x can then be launched directly from its Steam library entry. Steam will start it through Proton and provide the required Windows compatibility environment.
 
 ### 2. Using Wine Prefix
 
@@ -96,6 +130,36 @@ Others prefer not to rely on Proton's managed environment. In that case, a dedic
     curl -L https://github.com/iw4x/iw4x-rawfiles/releases/latest/download/release.zip -o release.zip
     unzip -o release.zip -d ~/.wine-mw2/drive_c/Program\ Files/Steam/steamapps/common/Call\ of\ Duty\ Modern\ Warfare\ 2
     ```
+
+5. **Install the optional DLC files**
+
+   ```bash
+   GAME_DIR="$HOME/.wine-mw2/drive_c/Program Files/Steam/steamapps/common/Call of Duty Modern Warfare 2"
+
+   mkdir -p "$GAME_DIR/main" "$GAME_DIR/zone/dlc"
+
+   curl -L https://cdn.iw4x.io/update.json -o dlcs.json
+
+   jq -r \
+     '.files[]
+      | select(.path | test("\\.(iwd|ff)$"))
+      | [.path, .asset_name, .blake3]
+      | @tsv' \
+     dlcs.json |
+   while IFS="$(printf '\t')" read -r path name checksum; do
+     case "$name" in
+       *.iwd) destination="$GAME_DIR/main/$name" ;;
+       *.ff)  destination="$GAME_DIR/zone/dlc/$name" ;;
+     esac
+
+     curl -L "https://cdn.iw4x.io/$path" -o "$destination"
+     printf '%s  %s\n' "$checksum" "$destination" | b3sum --check
+   done
+
+   rm -f dlcs.json
+   ```
+
+   This step requires `jq` and `b3sum`.
 
 </Steps>
 
