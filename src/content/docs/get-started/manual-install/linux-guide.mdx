@@ -72,7 +72,7 @@ For example, assuming `$STEAMLIBRARY` points to your Steam library, IW4x can be 
      dlcs.json |
    while IFS="$(printf '\t')" read -r path name checksum; do
      case "$name" in
-       *.iwd) destination="$GAME_DIR/main/$name" ;;
+       *.iwd) destination="$GAME_DIR/iw4x/$name" ;;
        *.ff)  destination="$GAME_DIR/zone/dlc/$name" ;;
      esac
 
@@ -148,7 +148,7 @@ Others prefer not to rely on Proton's managed environment. In that case, a dedic
      dlcs.json |
    while IFS="$(printf '\t')" read -r path name checksum; do
      case "$name" in
-       *.iwd) destination="$GAME_DIR/main/$name" ;;
+       *.iwd) destination="$GAME_DIR/iw4x/$name" ;;
        *.ff)  destination="$GAME_DIR/zone/dlc/$name" ;;
      esac
 
