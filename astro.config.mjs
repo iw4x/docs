@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { unified } from '@astrojs/markdown-remark'
 import starlight from '@astrojs/starlight';
 import starlightAutoDrafts from 'starlight-auto-drafts'
 import starlightImageZoom from 'starlight-image-zoom'
@@ -10,6 +11,9 @@ import starlightLinksValidator from 'starlight-links-validator'
 export default defineConfig({
   output: 'static',
   site: 'https://docs.iw4x.io',
+  markdown: {
+    processor: unified(),
+  },
 
   integrations: [
     starlight({
@@ -50,19 +54,19 @@ export default defineConfig({
         },
         {
           label: 'Guides',
-          autogenerate: { directory: 'guides' },
+          items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
           label: 'Modding',
-          autogenerate: { directory: 'modding' },
+          items: [{ autogenerate: { directory: 'modding' } }],
         },
         {
           label: 'Server Hosting',
-          autogenerate: { directory: 'hosting' },
+          items: [{ autogenerate: { directory: 'hosting' } }],
         },
         {
           label: 'Other',
-          autogenerate: { directory: 'other' },
+          items: [{ autogenerate: { directory: 'other' } }],
         }
       ],
 
